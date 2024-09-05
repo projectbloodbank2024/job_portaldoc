@@ -1,0 +1,316 @@
+openapi: 3.0.0
+info:
+  title: JOB_PORTAL
+  version: 1.0.0
+servers:
+- url: http://localhost:4000
+tags:
+- name: User_Routes
+- name: JOB ROUTES
+- name: APPLICATION ROUTES
+paths:
+  /api/v1/user/register:
+    post:
+      tags:
+      - User_Routes
+      summary: Register
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/user_register_body'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user/login:
+    post:
+      tags:
+      - User_Routes
+      summary: LOGIN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: abcd@gmail.com
+                password: "895623"
+                role: Job Seeker
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user/logout:
+    get:
+      tags:
+      - User_Routes
+      summary: LOGOUT
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user/getuser:
+    get:
+      tags:
+      - User_Routes
+      summary: GET_USER
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user/update/profile:
+    put:
+      tags:
+      - User_Routes
+      summary: UPDATE_PROFILE
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/update_profile_body'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user/update/password:
+    put:
+      tags:
+      - User_Routes
+      summary: UPDATE_PASSWORD
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                oldPassword: "784512"
+                newPassword: "895623"
+                confirmPassword: "895623"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/job/post:
+    post:
+      tags:
+      - JOB ROUTES
+      summary: POST JOB
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: Full Stack Developer
+                jobType: Full-Time
+                location: Mumbai
+                companyName: Aazon
+                introduction: "Tata Consultancy Services is an IT services, consulting\
+                  \ and business solutions organization that has been partnering with\
+                  \ many of the world's largest businesses for the past 50 years."
+                responsibilities: "Data Analyst,Full Stack Developer,Software Engineer"
+                qualifications: "B.TECH,MCA,BCA"
+                jobNiche: WEB Developer
+                salary: "340000"
+                hiringMultipleCandidates: "Yes"
+                offers: "Car,Flat,Laptop"
+                personalWebsiteTitle: Amazon
+                personalWebsiteUrl: Amazon.com
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/job/getall:
+    get:
+      tags:
+      - JOB ROUTES
+      summary: GET ALL JOBS
+      parameters:
+      - name: searchKeyword
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: city
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Delhi
+      - name: niche
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: WEB Developer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/job/getmyjobs:
+    get:
+      tags:
+      - JOB ROUTES
+      summary: GET MY JOBS
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/job/delete/66d54d94e452d7bffe026047:
+    delete:
+      tags:
+      - JOB ROUTES
+      summary: DELETE JOB
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/job/get/66d30863fbf23475bbcd92a1:
+    get:
+      tags:
+      - JOB ROUTES
+      summary: GET A SINGLE JOB
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/application/post/66d5501fe452d7bffe026053:
+    post:
+      tags:
+      - APPLICATION ROUTES
+      summary: POST APPLICATION
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/post_66d5501fe452d7bffe026053_body'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/application/employer/getall:
+    get:
+      tags:
+      - APPLICATION ROUTES
+      summary: EMPLOYER GET ALL APPLICATION
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/application/jobseeker/getall:
+    get:
+      tags:
+      - APPLICATION ROUTES
+      summary: JOB SEEKER GET ALL APPLICATION
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/application/delete/66d6ac98c62ea8144431d04c:
+    delete:
+      tags:
+      - APPLICATION ROUTES
+      summary: DELETE APPLICATION
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+components:
+  schemas:
+    user_register_body:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Ansh Verma
+        email:
+          type: string
+          example: ansh1@gmail.com
+        phone:
+          type: integer
+          example: 7894561230
+        address:
+          type: string
+          example: India
+        password:
+          type: integer
+          example: 784512
+        role:
+          type: string
+          example: Job Seeker
+        firstNiche:
+          type: string
+          example: Backend
+        secondNiche:
+          type: string
+          example: Frontend
+        thirdNiche:
+          type: string
+          example: MERN STACK DEVELOPER
+        resume:
+          type: string
+          format: binary
+        coverLetter:
+          type: string
+          example: hi coverletter this is adi
+    update_profile_body:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Gaurav verma
+        firstNiche:
+          type: string
+          example: JAVA
+        secondNiche:
+          type: string
+          example: 'PYTHON '
+        thirdNiche:
+          type: string
+          example: C++
+        email:
+          type: string
+          example: abcd@gmail.com
+        resume:
+          type: string
+          format: binary
+    post_66d5501fe452d7bffe026053_body:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john@gmail.com
+        phone:
+          type: integer
+          example: 784512556
+        address:
+          type: string
+          example: India
+        coverLetter:
+          type: string
+          example: hello
